@@ -10,7 +10,7 @@
             <p class="auth-subtitle">Gestión de proyectos simple y eficaz</p>
         </div>
 
-        <form method="POST" action="{{ url_for('auth.login') }}" class="auth-form">
+        <form method="POST" action="{{ url_for('autenticacion.login') }}" class="auth-form">
             <div class="form-group">
                 <label for="email">Correo electrónico</label>
                 <div class="input-wrapper">
@@ -50,7 +50,7 @@
         </form>
 
         <div class="auth-footer">
-            <p>¿No tienes cuenta? <a href="{{ url_for('auth.register') }}">Regístrate aquí</a></p>
+            <p>¿No tienes cuenta? <a href="{{ url_for('autenticacion.register') }}">Regístrate aquí</a></p>
         </div>
     </div>
 </div>

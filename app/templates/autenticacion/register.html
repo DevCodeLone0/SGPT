@@ -10,7 +10,7 @@
             <p class="auth-subtitle">Crea tu cuenta y empieza a organizar</p>
         </div>
 
-        <form method="POST" action="{{ url_for('auth.register') }}" class="auth-form">
+        <form method="POST" action="{{ url_for('autenticacion.register') }}" class="auth-form">
             <div class="form-group">
                 <label for="name">Nombre completo</label>
                 <div class="input-wrapper">
@@ -62,7 +62,7 @@
         </form>
 
         <div class="auth-footer">
-            <p>¿Ya tienes cuenta? <a href="{{ url_for('auth.login') }}">Inicia sesión</a></p>
+            <p>¿Ya tienes cuenta? <a href="{{ url_for('autenticacion.login') }}">Inicia sesión</a></p>
         </div>
     </div>
 </div>
