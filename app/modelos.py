@@ -79,8 +79,7 @@ class Project(db.Model):
     @property
     def completed_tasks(self) -> int:
         """Cuántas están completadas."""
-        from app.modelos import Status as S
-        completado = S.query.filter_by(name='completado').first()
+        completado = Status.query.filter_by(name='completado').first()
         if completado:
             return self.tasks.filter_by(status_id=completado.id).count()
         return 0
