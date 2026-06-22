@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Notificaciones · SGPT{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <h2>Notificaciones</h2>
+        <p class="text-muted">{{ notificaciones | length }} en total · {{ sin_leer }} sin leer</p>
+    </div>
+    {% if sin_leer > 0 %}
+    <a href="{{ url_for('notificaciones.marcar_todas_leidas') }}" class="btn btn-ghost">
+        Marcar todas como leídas
+    </a>
+    {% endif %}
+</div>
+
+<div class="card">
+    <div class="card-body card-body-flush">
+        {% if notificaciones %}
+        <div class="notifications-list">
+            {% for n in notificaciones %}
+            <div class="notif-item {% if not n.is_read %}notif-unread{% endif %}" id="notif-{{ n.id }}">
+                <div class="notif-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                </div>
+                <div class="notif-content">
+                    <p class="notif-message">{{ n.message }}</p>
+                    <span class="notif-time">{{ n.created_at.strftime('%d/%m/%Y %H:%M') }}</span>
+                </div>
+                {% if not n.is_read %}
+                <a href="{{ url_for('notificaciones.marcar_leida', notif_id=n.id) }}" class="notif-mark-read" title="Marcar como leída">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                </a>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="64" height="64">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+            </svg>
+            <h3>Sin notificaciones</h3>
+            <p>Cuando tengas tareas vencidas, van a aparecer acá.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

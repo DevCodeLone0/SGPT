@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}{{ 'Editar' if es_edicion else 'Nuevo' }} Proyecto · SGPT{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div class="breadcrumb">
+        <a href="{{ url_for('proyectos.listar') }}">Proyectos</a>
+        <span>›</span>
+        <span>{{ 'Editar' if es_edicion else 'Nuevo Proyecto' }}</span>
+    </div>
+</div>
+
+<div class="form-card card">
+    <div class="card-body">
+        <h3 class="form-title">{{ 'Editar' if es_edicion else 'Nuevo' }} Proyecto</h3>
+        <form method="POST" class="project-form">
+            <div class="form-group">
+                <label for="name">Nombre del proyecto *</label>
+                <input type="text" id="name" name="name" required minlength="3" maxlength="100"
+                       value="{{ proyecto.name if proyecto else '' }}"
+                       placeholder="Ej: Redesign del sitio web">
+                <span class="form-hint">Entre 3 y 100 caracteres</span>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Descripción</label>
+                <textarea id="description" name="description" rows="3"
+                          placeholder="Contame de qué se trata...">{{ proyecto.description if proyecto else '' }}</textarea>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="due_date">Fecha límite</label>
+                    <input type="date" id="due_date" name="due_date"
+                           value="{{ proyecto.due_date.strftime('%Y-%m-%d') if proyecto and proyecto.due_date else '' }}">
+                </div>
+                <div class="form-group">
+                    <label for="status_id">Estado *</label>
+                    <select id="status_id" name="status_id" required>
+                        <option value="">Elegir estado</option>
+                        {% for e in estados %}
+                        <option value="{{ e.id }}" {% if proyecto and proyecto.status_id == e.id %}selected{% endif %}>
+                            {{ e.name | capitalize }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="priority_id">Prioridad *</label>
+                    <select id="priority_id" name="priority_id" required>
+                        <option value="">Elegir prioridad</option>
+                        {% for p in prioridades %}
+                        <option value="{{ p.id }}" {% if proyecto and proyecto.priority_id == p.id %}selected{% endif %}>
+                            {{ p.name | capitalize }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <a href="{{ url_for('proyectos.listar') if es_edicion else url_for('inicio.index') }}" class="btn btn-ghost">Cancelar</a>
+                <button type="submit" class="btn btn-primary">{{ 'Guardar Cambios' if es_edicion else 'Crear Proyecto' }}</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,151 @@
+/* ========================================
+   SGPT — PROJECTS
+   Cards, grid, lista de proyectos
+   ======================================== */
+
+/* Project grid */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+.project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.25s ease;
+    overflow: hidden;
+}
+
+.project-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(124, 58, 237, 0.2);
+}
+
+.project-card-body { padding: 22px; flex: 1; }
+
+.project-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.project-name {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--text);
+}
+
+.project-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 14px;
+}
+
+.project-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.project-date {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.project-progress {
+    padding: 14px 22px;
+    background: var(--surface-2);
+    border-top: 1px solid var(--border);
+}
+
+.progress-track {
+    height: 6px;
+    background: var(--surface-3);
+    border-radius: 99px;
+    overflow: hidden;
+    margin-bottom: 6px;
+}
+
+.progress-track-lg { height: 8px; }
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    border-radius: 99px;
+    transition: width 0.6s ease;
+}
+
+.progress-text {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* Project detail header */
+.project-detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.project-detail-info h2 {
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+}
+
+.project-description {
+    color: var(--text-muted);
+    font-size: 15px;
+    margin-bottom: 14px;
+    max-width: 600px;
+}
+
+.project-detail-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+}
+
+.meta-item {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+.project-detail-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.detail-progress {
+    margin-bottom: 32px;
+}
+
+/* Project form */
+.project-form {}
+
+/* Project actions */
+.project-form .form-group input:focus,
+.project-form .form-group select:focus,
+.project-form .form-group textarea:focus {
+    border-color: var(--primary);
+}
