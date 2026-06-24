@@ -122,7 +122,8 @@ class Task(db.Model):
     def is_overdue(self) -> bool:
         """Si ya venció y no está completada."""
         if self.due_date:
-            return self.due_date < datetime.now(timezone.utc)
+            ahora = datetime.now(timezone.utc) if self.due_date.tzinfo else datetime.now()
+            return self.due_date < ahora
         return False
 
     def __repr__(self):
