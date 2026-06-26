@@ -13,6 +13,9 @@ def listar():
     """Lista de proyectos con filtros."""
     estado_filtro = request.args.get('status', type=int)
     prioridad_filtro = request.args.get('priority', type=int)
+    numtask_filtro = request.args.get('numtask', type=str)
+    if numtask_filtro == "":
+        numtask_filtro = None
 
     query = Project.query.filter_by(user_id=current_user.id)
 
@@ -22,6 +25,21 @@ def listar():
         query = query.filter_by(priority_id=prioridad_filtro)
 
     proyectos = query.order_by(Project.updated_at.desc()).all()
+
+    if numtask_filtro:
+        proyectos_filtrados = []
+        for p in proyectos:
+            count = p.task_count
+            if numtask_filtro == '0' and count == 0:
+                proyectos_filtrados.append(p)
+            elif numtask_filtro == '1-5' and 1 <= count <= 5:
+                proyectos_filtrados.append(p)
+            elif numtask_filtro == '6-10' and 6 <= count <= 10:
+                proyectos_filtrados.append(p)
+            elif numtask_filtro == '11-20' and 11 <= count <= 20:
+                proyectos_filtrados.append(p)
+        proyectos = proyectos_filtrados
+
     estados = Status.query.all()
     prioridades = Priority.query.all()
 
@@ -31,7 +49,8 @@ def listar():
         estados=estados,
         prioridades=prioridades,
         estado_actual=estado_filtro,
-        prioridad_actual=prioridad_filtro
+        prioridad_actual=prioridad_filtro,
+        numtask_actual=numtask_filtro
     )
 
 

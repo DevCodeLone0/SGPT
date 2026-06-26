@@ -24,6 +24,14 @@ class Priority(db.Model):
     def __repr__(self):
         return f'<Priority {self.name}>'
 
+class numerodeTareas(db.Model):
+    """Modelo para filtrar proyectos por número de tareas."""
+    __tablename__ = 'numerodetareas'
+    id = db.Column(db.Integer, primary_key=True)
+    range = db.Column(db.String(20), unique=True, nullable=False)
+
+    def __repr__(self):
+        return f'<NumerodeTareas {self.range}>'
 
 class User(UserMixin, db.Model):
     """Un usuario registrado."""

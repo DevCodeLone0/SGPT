@@ -30,7 +30,15 @@
             <option value="{{ p.id }}" {% if prioridad_actual == p.id %}selected{% endif %}>{{ p.name | capitalize }}</option>
             {% endfor %}
         </select>
-        {% if estado_actual or prioridad_actual %}
+        <select name="numtask" class="filter-select" onchange="this.form.submit()">
+            <option value="">Numero de tareas</option>
+            <option value="0" {% if numtask_actual == '0' %}selected{% endif %}>0 tareas</option>
+            <option value="1-5" {% if numtask_actual == '1-5' %}selected{% endif %}>1-5 tareas</option>
+            <option value="6-10" {% if numtask_actual == '6-10' %}selected{% endif %}>6-10 tareas</option>
+            <option value="11-20" {% if numtask_actual == '11-20' %}selected{% endif %}>11-20 tareas</option>
+        </select>
+        </select>
+        {% if estado_actual or prioridad_actual or numtask_actual %}
         <a href="{{ url_for('proyectos.listar') }}" class="btn btn-ghost btn-sm">Limpiar filtros</a>
         {% endif %}
     </form>
